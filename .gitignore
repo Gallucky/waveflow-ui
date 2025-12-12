@@ -1,43 +1,27 @@
-# Node modules
-node_modules/
-.pnp/
-.pnp.js
-
-# Vite cache and build output
-dist/
-.vite/
-out/
-*.local
-
-# Storybook build
-.storybook-static/
-
-# Log files
+# Logs
+logs
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+lerna-debug.log*
 
-# OS files
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
 .DS_Store
-Thumbs.db
-
-# TypeScript
-*.tsbuildinfo
-
-# Editor/IDE
-.vscode/
-.idea/
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
 
-# Environment variables
-.env
-.env.local
-.env.*.local
-
-# Misc
-*.log
+*storybook.log
+storybook-static

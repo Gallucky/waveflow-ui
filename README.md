@@ -1,82 +1,73 @@
-# WaveFlow UI
+# React + TypeScript + Vite
 
-A modern React UI component library powered by TypeScript and TailwindCSS. WaveFlow UI provides reusable, accessible, and customizable components for building consistent user interfaces in React applications.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
----
+Currently, two official plugins are available:
 
-## Features
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
--   Built with React 18+ and TypeScript
--   Fully compatible with TailwindCSS
--   Supports ESM and CJS module formats
--   Tree-shakable and lightweight
--   Ready-to-use Storybook for component documentation and development
--   Easy to extend with custom themes
+## React Compiler
 
----
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Installation
+## Expanding the ESLint configuration
 
-Install the library via npm:
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-npm install @waveflow/ui
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
-or using yarn:
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
 
-yarn add @waveflow/ui
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
 
-> Peer dependencies required: react and react-dom.
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
----
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-## Usage
-
-Import components directly:
-
-import React from "react"; import { Button } from "@waveflow/ui"; import "@waveflow/ui/dist/index.css"; // Import Tailwind styles if needed
-
-export const App = () => (
-
-  <div>
-    <Button>Click me</Button>
-  </div>
-);
-
----
-
-## Development
-
-Clone the repository and install dependencies:
-
-git clone <repo-url> cd waveflow-ui npm install
-
-Start Vite dev server:
-
-npm run dev
-
-Run Storybook for development and documentation:
-
-npm run storybook
-
-Build the library:
-
-npm run build
-
----
-
-## Contributing
-
-Contributions are welcome! Please follow these guidelines:
-
--   Fork the repository
--   Create a new feature branch (git checkout -b feature/my-component)
--   Add your component and update src/index.ts exports
--   Add Storybook stories for your component
--   Run npm run build to verify compilation
--   Submit a pull request
-
----
-
-## License
-
-MIT © Gal
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
